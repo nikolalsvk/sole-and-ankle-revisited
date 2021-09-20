@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
 
-import { COLORS, WEIGHTS } from '../../constants';
-import Logo from '../Logo';
-import SuperHeader from '../SuperHeader';
-import MobileMenu from '../MobileMenu';
+import Logo from "../Logo";
+import SuperHeader from "../SuperHeader";
+import MobileMenu from "../MobileMenu";
+import Icon from "../Icon";
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -16,11 +16,14 @@ const Header = () => {
 
   return (
     <header>
-      <SuperHeader />
+      <SuperHeaderWrapper>
+        <SuperHeader />
+      </SuperHeaderWrapper>
       <MainHeader>
         <Side>
           <Logo />
         </Side>
+
         <Nav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
@@ -28,8 +31,20 @@ const Header = () => {
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
+          <NavLink href="/collections">Collections</NavLink>
+          <NavLink href="/collections">Collections</NavLink>
+          <NavLink href="/collections">Collections</NavLink>
         </Nav>
+
         <Side />
+
+        <MobileNav>
+          <Icon id="shopping-bag" />
+          <Icon id="search" />
+          <Icon id="menu" onClick={() => setShowMobileMenu(true)} />
+        </MobileNav>
+
+        <MobileMenu />
       </MainHeader>
 
       <MobileMenu
@@ -42,16 +57,42 @@ const Header = () => {
 
 const MainHeader = styled.div`
   display: flex;
-  align-items: baseline;
+  align-items: center;
   padding: 18px 32px;
   height: 72px;
-  border-bottom: 1px solid ${COLORS.gray[300]};
+  border-bottom: 1px solid var(--color-gray-300);
+
+  @media ${(props) => props.theme.queries.tabletAndUp} {
+    align-items: baseline;
+  }
+`;
+
+const SuperHeaderWrapper = styled.div`
+  border-top: 4px solid var(--color-gray-900);
+
+  @media ${(props) => props.theme.queries.tabletAndUp} {
+    border-top: none;
+  }
 `;
 
 const Nav = styled.nav`
-  display: flex;
-  gap: 48px;
+  gap: clamp(1rem, 12vw - 9rem, 3rem);
   margin: 0px 48px;
+  display: none;
+
+  @media ${(props) => props.theme.queries.tabletAndUp} {
+    display: flex;
+  }
+`;
+
+const MobileNav = styled.nav`
+  display: flex;
+  gap: clamp(${22 / 16}rem, 5vw - 1rem, ${40 / 16}rem);
+  margin-left: 24px;
+
+  @media ${(props) => props.theme.queries.tabletAndUp} {
+    display: none;
+  }
 `;
 
 const Side = styled.div`
@@ -62,11 +103,12 @@ const NavLink = styled.a`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
-  color: ${COLORS.gray[900]};
-  font-weight: ${WEIGHTS.medium};
+  color: var(--color-gray-900);
+  font-weight: var(--weight-medium);
+  flex: 1 1;
 
   &:first-of-type {
-    color: ${COLORS.secondary};
+    color: var(--color-secondary);
   }
 `;
 
