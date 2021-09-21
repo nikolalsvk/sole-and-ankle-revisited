@@ -74,7 +74,11 @@ const MainColumn = styled.div`
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-end;
+
+  @media ${(props) => props.theme.queries.tabletAndUp} {
+    align-items: baseline;
+  }
 `;
 
 const Title = styled.h2`

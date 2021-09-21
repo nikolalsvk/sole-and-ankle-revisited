@@ -13,7 +13,7 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
   }
 
   return (
-    <DialogOverlayStyled>
+    <DialogOverlayStyled isOpen={isOpen} onDismiss={onDismiss}>
       <Wrapper>
         <DialogContentStyled>
           <Button onClick={onDismiss}>
@@ -23,21 +23,19 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
           <Side />
 
           <Nav>
-            <a className="active" href="/sale">
-              Sale
-            </a>
-            <a href="/new">New&nbsp;Releases</a>
-            <a href="/men">Men</a>
-            <a href="/women">Women</a>
-            <a href="/kids">Kids</a>
-            <a href="/collections">Collections</a>
+            <NavLink href="/sale">Sale</NavLink>
+            <NavLink href="/new">New&nbsp;Releases</NavLink>
+            <NavLink href="/men">Men</NavLink>
+            <NavLink href="/women">Women</NavLink>
+            <NavLink href="/kids">Kids</NavLink>
+            <NavLink href="/collections">Collections</NavLink>
           </Nav>
 
           <FooterWrapper>
             <Footer>
-              <a href="/terms">Terms and Conditions</a>
-              <a href="/privacy">Privacy Policy</a>
-              <a href="/contact">Contact Us</a>
+              <FooterLink href="/terms">Terms and Conditions</FooterLink>
+              <FooterLink href="/privacy">Privacy Policy</FooterLink>
+              <FooterLink href="/contact">Contact Us</FooterLink>
             </Footer>
           </FooterWrapper>
         </DialogContentStyled>
@@ -100,16 +98,16 @@ const Nav = styled.nav`
   justify-content: center;
   gap: 22px;
   flex-direction: column;
+`;
 
-  a {
-    font-size: ${18 / 16}rem;
-    font-weight: var(--weight-medium);
-    text-transform: uppercase;
-    color: black;
-    text-decoration: none;
-  }
+const NavLink = styled.a`
+  font-size: ${18 / 16}rem;
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  color: black;
+  text-decoration: none;
 
-  .active {
+  &:first-child {
     color: var(--color-secondary);
   }
 `;
@@ -118,12 +116,12 @@ const Footer = styled.footer`
   display: flex;
   gap: 14px;
   flex-direction: column;
+`;
 
-  a {
-    font-size: ${14 / 16}rem;
-    color: var(--color-gray-700);
-    text-decoration: none;
-  }
+const FooterLink = styled.a`
+  font-size: ${14 / 16}rem;
+  color: var(--color-gray-700);
+  text-decoration: none;
 `;
 
 export default MobileMenu;
